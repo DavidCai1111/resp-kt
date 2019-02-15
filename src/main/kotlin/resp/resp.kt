@@ -26,4 +26,24 @@ class Resp {
   fun encodeNullArray (): String {
     return "*-1${CRLF}"
   }
+
+  fun encodeArray (array: Array<String>): String {
+    var result = "*${array.size}${CRLF}"
+
+    for (string in array) {
+      result += string
+    }
+
+    return result
+  }
+
+  fun encodeRequestArray (array: Array<String>): String {
+    var request: Array<String> = Array<String>(array.size, { "$it" })
+
+    array.forEachIndexed({
+      index, string -> request.set(index, this.encodeBulkString(string))
+    })
+
+    return this.encodeArray(request)
+  }
 }

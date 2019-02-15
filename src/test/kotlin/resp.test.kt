@@ -27,4 +27,12 @@ class RespTest {
   @Test fun testEncodeNullArray() {
     assertEquals(Resp().encodeNullArray(), "*-1\r\n")
   }
+
+  @Test fun testEncodeArray() {
+    assertEquals(Resp().encodeArray(arrayOf(Resp().encodeInt(1))), "*1\r\n:1\r\n")
+  }
+
+  @Test fun testEncodeRequest() {
+    assertEquals(Resp().encodeRequestArray(arrayOf("LLEN", "mylist")) , "*2\r\n$4\r\nLLEN\r\n$6\r\nmylist\r\n")
+  }
 }
