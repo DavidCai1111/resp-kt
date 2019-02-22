@@ -6,7 +6,7 @@ class Resp () {
     fun encodeString (str: String) : String {
         return "+$str$CRLF"
     }
-    
+
     fun encodeError (errorMessage: String): String {
         return "-$errorMessage$CRLF"
     }
@@ -16,7 +16,7 @@ class Resp () {
     }
 
     fun encodeBulkString (bulkString: String): String {
-        return "$$bulkString.length$CRLF$bulkString$CRLF"
+        return "$${bulkString.length}$CRLF$bulkString$CRLF"
     }
 
     fun encodeNull (): String {
@@ -28,7 +28,7 @@ class Resp () {
     }
 
     fun encodeArray (array: Array<String>): String {
-        var result = "*$array.size$CRLF"
+        var result = "*${array.size}$CRLF"
 
         for (string in array) {
             result += string
